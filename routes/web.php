@@ -17,11 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('login', function () {
-    return view('login');
-})->name('login');
-
-Route::get('checkout', function () {
+Route::get('checkhout', function () {
     return view('checkout');
 })->name('checkout');
 
@@ -29,6 +25,8 @@ Route::get('success', function () {
     return view('success');
 })->name('success');
 
-Route::get('dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
