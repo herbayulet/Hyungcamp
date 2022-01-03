@@ -1,25 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <title>Laracamp by BuildWith Angga</title>
-</head>
-
-<body>
-
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="{{ route('welcome') }}">
@@ -45,25 +23,58 @@
                         <a class="nav-link" href="#">Business</a>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <a href="{{ route('login') }}" class="btn btn-master btn-secondary me-3">
-                        Sign In
-                    </a>
-                    <a href="#" class="btn btn-master btn-primary">
-                        Sign Up
-                    </a>
-                </div>
+                @auth
+                    {{-- <div class="d-flex user-logged nav-item dropdown no-arrow">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Halo, {{ Auth::user()->name }} !
+                            <img src="{{ Auth::user()->avatar }}" class="user-photo" alt="Bayu Nugroho">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
+                                <li>
+                                    <a href="#" class="dropdown-item">My Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item"
+                                        onclick="event.prevenDefault(); document.getElementById('logout-form').submit()">Sign
+                                        Out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="post"
+                                        style="display: none">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    </form>
+                                </li>
+                            </ul>
+                        </a>
+                    </div> --}}
+                    <div class="d-flex user-logged nav-item dropdown no-arrow">
+                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Halo, {{ Auth::user()->name }}!
+                            @if (Auth::user()->avatar)
+                                <img src="{{ Auth::user()->avatar }}" class="user-photo rounded-circle" alt="">
+                            @else
+                                <img src="https://ui-avatars.com/api/?name=Admin" class="user-photo rounded-circle" alt="">
+                            @endif
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="right: 0; left: auto">
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">My Dashboard</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign
+                                        Out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    </form>
+                                </li>
+                            </ul>
+                    </div>
+                @else
+                    <div class="d-flex">
+                        <a href="{{ route('login') }}" class="btn btn-master btn-secondary me-3">
+                            Sign In
+                        </a>
+                        <a href="#" class="btn btn-master btn-primary">
+                            Sign Up
+                        </a>
+                    </div>
+                @endauth
             </div>
         </div>
     </nav>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>
-
-</body>
-
-</html>
