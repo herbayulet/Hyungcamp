@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-// route to checkout page
-Route::get('checkhout', function () {
-    return view('checkout');
-})->name('checkout');
-
 // route to success checkout page
-Route::get('success', function () {
-    return view('success');
-})->name('success');
+Route::get('checkout/success}', [CheckoutController::class, 'success'])->name('checkout.success');
+
+// route to checkout page (memilih kelasnya)
+Route::get('checkout/{camps:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
 
 // route to dashboard page
 Route::get('/dashboard', function () {
